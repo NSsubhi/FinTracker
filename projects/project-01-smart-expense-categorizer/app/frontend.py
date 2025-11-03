@@ -154,6 +154,14 @@ with st.sidebar:
     API_URL = st.text_input("🌐 API Server URL", value="http://localhost:8000", 
                             help="Enter your API server URL (leave as default for local)")
     
+    # Currency selection
+    currency_symbol = st.selectbox(
+        "💰 Currency Symbol",
+        ["$", "₹", "€", "£", "¥", "None"],
+        index=0,
+        help="Select currency symbol for display"
+    )
+    
     # Test API connection
     if st.button("🔌 Test Connection"):
         try:
@@ -202,9 +210,9 @@ tab1, tab2, tab3, tab4 = st.tabs(["📤 Upload & Process", "📊 Analytics Dashb
 with tab1:
     st.header("📤 Upload & Process Transactions")
     
-    col1, col2 = st.columns([2, 1])
+    main_col1, main_col2 = st.columns([2, 1])
     
-    with col1:
+    with main_col1:
         # File upload
         uploaded_file = st.file_uploader(
             "Choose a CSV file to upload",
@@ -214,19 +222,44 @@ with tab1:
         
         # Sample file download
         st.markdown("### 📁 Need a sample file?")
-        sample_file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "sample_transactions.csv")
-        if os.path.exists(sample_file_path):
-            with open(sample_file_path, "rb") as file:
-                st.download_button(
-                    label="⬇️ Download Sample CSV",
-                    data=file,
-                    file_name="sample_transactions.csv",
-                    mime="text/csv"
-                )
+        
+        # Try multiple paths to find the sample file
+        current_file = os.path.abspath(__file__)
+        app_dir = os.path.dirname(current_file)
+        project_root = os.path.dirname(app_dir)
+        
+        # Try different possible paths
+        possible_paths = [
+            os.path.join(project_root, "sample_transactions_us.csv"),
+            os.path.join(app_dir, "..", "sample_transactions_us.csv"),
+            os.path.join(os.getcwd(), "sample_transactions_us.csv"),
+            os.path.join(os.getcwd(), "..", "sample_transactions_us.csv"),
+            "sample_transactions_us.csv"
+        ]
+        
+        sample_file_path = None
+        for path in possible_paths:
+            abs_path = os.path.abspath(path)
+            if os.path.exists(abs_path):
+                sample_file_path = abs_path
+                break
+        
+        if sample_file_path:
+            try:
+                with open(sample_file_path, "rb") as file:
+                    file_data = file.read()
+                    st.download_button(
+                        label="⬇️ Download Sample File",
+                        data=file_data,
+                        file_name="sample_transactions.csv",
+                        mime="text/csv"
+                    )
+            except Exception as e:
+                st.error(f"Error loading sample file: {e}")
         else:
-            st.warning("Sample file not found")
+            st.warning("Sample file not found. Please make sure sample_transactions_us.csv exists in the project directory.")
     
-    with col2:
+    with main_col2:
         st.markdown("### 💡 Quick Categorize")
         st.markdown("Test single transaction categorization:")
         
@@ -307,7 +340,7 @@ with tab1:
                                     st.metric("Anomalies", result['anomalies_detected'])
                                 with col4:
                                     total_amt = processed_df['Amount'].sum()
-                                    st.metric("Total Amount", f"₹{total_amt:,.2f}")
+                                    st.metric("Total Amount", f"{currency_symbol if currency_symbol != 'None' else ''}{total_amt:,.2f}")
                                 
                                 # Category pie chart
                                 st.subheader("📊 Category Distribution")
@@ -355,7 +388,7 @@ with tab1:
                                 st.metric("Date Range", f"{(processed_df['Date'].max() - processed_df['Date'].min()).days} days")
                             with col4:
                                 total_amt = processed_df['Amount'].sum()
-                                st.metric("Total Amount", f"₹{total_amt:,.2f}")
+                                st.metric("Total Amount", f"{currency_symbol if currency_symbol != 'None' else ''}{total_amt:,.2f}")
                             
                             # Category distribution
                             st.subheader("📊 Category Distribution")
@@ -393,17 +426,21 @@ with tab2:
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("💵 Total Spending", f"₹{total_spending:,.2f}", 
-                     delta=f"-₹{total_spending:,.2f}" if total_spending > 0 else None)
+            currency_prefix = currency_symbol if currency_symbol != 'None' else ''
+            st.metric("💵 Total Spending", f"{currency_prefix}{total_spending:,.2f}", 
+                     delta=f"-{currency_prefix}{total_spending:,.2f}" if total_spending > 0 else None)
         with col2:
-            st.metric("💰 Total Income", f"₹{total_income:,.2f}",
-                     delta=f"+₹{total_income:,.2f}" if total_income > 0 else None)
+            currency_prefix = currency_symbol if currency_symbol != 'None' else ''
+            st.metric("💰 Total Income", f"{currency_prefix}{total_income:,.2f}",
+                     delta=f"+{currency_prefix}{total_income:,.2f}" if total_income > 0 else None)
         with col3:
-            st.metric("💸 Net Savings", f"₹{net_savings:,.2f}",
+            currency_prefix = currency_symbol if currency_symbol != 'None' else ''
+            st.metric("💸 Net Savings", f"{currency_prefix}{net_savings:,.2f}",
                      delta=f"{savings_rate:.1f}%" if savings_rate > 0 else None)
         with col4:
             avg_trans = df['Amount'].mean()
-            st.metric("📊 Avg Transaction", f"₹{avg_trans:,.2f}")
+            currency_prefix = currency_symbol if currency_symbol != 'None' else ''
+            st.metric("📊 Avg Transaction", f"{currency_prefix}{avg_trans:,.2f}")
         
         # Category spending breakdown
         st.subheader("📈 Spending by Category")
@@ -415,7 +452,7 @@ with tab2:
             fig = px.bar(
                 x=category_spending.index,
                 y=category_spending.values,
-                labels={'x': 'Category', 'y': 'Amount (₹)'},
+                labels={'x': 'Category', f'y': 'Amount ({currency_symbol if currency_symbol != "None" else ""})'},
                 title="Total Spending by Category",
                 color=category_spending.values,
                 color_continuous_scale='Blues'
@@ -448,7 +485,7 @@ with tab2:
         fig.update_layout(
             title="Monthly Spending Trend",
             xaxis_title="Month",
-            yaxis_title="Amount (₹)",
+            yaxis_title=f"Amount ({currency_symbol if currency_symbol != 'None' else ''})",
             hovermode='x unified',
             template='plotly_white'
         )
@@ -474,7 +511,7 @@ with tab2:
         fig.update_layout(
             title="Monthly Income vs Expenses",
             xaxis_title="Month",
-            yaxis_title="Amount (₹)",
+            yaxis_title=f"Amount ({currency_symbol if currency_symbol != 'None' else ''})",
             barmode='group',
             template='plotly_white'
         )
@@ -488,10 +525,11 @@ with tab2:
             [d for d in daily_order if d in df['DayOfWeek'].values], fill_value=0
         )
         
+        currency_label = currency_symbol if currency_symbol != 'None' else ''
         fig = px.bar(
             x=daily_pattern.index,
             y=daily_pattern.values,
-            labels={'x': 'Day of Week', 'y': 'Average Amount (₹)'},
+            labels={'x': 'Day of Week', 'y': f'Average Amount ({currency_label})'},
             title="Average Spending by Day of Week",
             color=daily_pattern.values,
             color_continuous_scale='Viridis'
@@ -558,9 +596,10 @@ with tab3:
                     
                     col1, col2, col3 = st.columns(3)
                     with col1:
-                        st.metric("📊 Avg Daily Spending", f"₹{avg_predicted:,.2f}")
+                        currency_prefix = currency_symbol if currency_symbol != 'None' else ''
+                        st.metric("📊 Avg Daily Spending", f"{currency_prefix}{avg_predicted:,.2f}")
                     with col2:
-                        st.metric("💰 Total Forecasted", f"₹{total_predicted:,.2f}")
+                        st.metric("💰 Total Forecasted", f"{currency_prefix}{total_predicted:,.2f}")
                     with col3:
                         trend_emoji = "📈" if trend == "increasing" else "📉" if trend == "decreasing" else "➡️"
                         st.metric("📈 Trend", f"{trend_emoji} {trend.replace('_', ' ').title()}")
@@ -599,10 +638,11 @@ with tab3:
                             showlegend=False
                         ))
                     
+                    currency_label = currency_symbol if currency_symbol != 'None' else ''
                     fig.update_layout(
                         title="Spending Forecast",
                         xaxis_title="Date",
-                        yaxis_title="Predicted Amount (₹)",
+                        yaxis_title=f"Predicted Amount ({currency_label})",
                         hovermode='x unified',
                         template='plotly_white'
                     )
@@ -611,8 +651,9 @@ with tab3:
                     # Prediction table
                     with st.expander("📋 View Detailed Predictions"):
                         display_df = pred_df[['date', 'predicted']].copy()
-                        display_df.columns = ['Date', 'Predicted Amount (₹)']
-                        display_df['Predicted Amount (₹)'] = display_df['Predicted Amount (₹)'].apply(lambda x: f"₹{x:,.2f}")
+                        currency_prefix = currency_symbol if currency_symbol != 'None' else ''
+                        display_df.columns = ['Date', f'Predicted Amount ({currency_prefix})']
+                        display_df[f'Predicted Amount ({currency_prefix})'] = display_df[f'Predicted Amount ({currency_prefix})'].apply(lambda x: f"{currency_prefix}{float(x):,.2f}" if isinstance(x, (int, float, str)) else x)
                         st.dataframe(display_df, use_container_width=True)
                     
                 except Exception as e:
@@ -722,9 +763,10 @@ with tab4:
                         # Display table
                         display_cols = ['Date', 'Description', 'Amount', 'Category']
                         available_cols = [col for col in display_cols if col in anomaly_df.columns]
+                        currency_prefix = currency_symbol if currency_symbol != 'None' else ''
                         st.dataframe(
                             anomaly_df[available_cols].style.format({
-                                'Amount': lambda x: f"₹{x:,.2f}" if isinstance(x, (int, float)) else x,
+                                'Amount': lambda x: f"{currency_prefix}{x:,.2f}" if isinstance(x, (int, float)) else x,
                                 'Date': lambda x: x.strftime('%Y-%m-%d') if hasattr(x, 'strftime') else x
                             }),
                             use_container_width=True
