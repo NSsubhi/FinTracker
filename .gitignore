@@ -55,6 +55,10 @@ desktop.ini
 .railway/
 .heroku/
 
+# Documentation/Guide Files (exclude helper guides)
+GITHUB_PUSH_GUIDE.md
+CREATE_TOKEN_STEPS.md
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
