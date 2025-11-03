@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# ML Models
+*.pkl
+*.h5
+*.hdf5
+*.joblib
+models/
+saved_models/
+
+# Data files (exclude sample files)
+*.csv
+*.xlsx
+*.xls
+data/
+!projects/project-01-smart-expense-categorizer/sample_transactions.csv
+!projects/project-01-smart-expense-categorizer/test_transactions.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Deployment
+.vercel/
+.railway/
+.heroku/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Streamlit
+.streamlit/secrets.toml
+
