@@ -25,8 +25,8 @@ saved_models/
 *.xlsx
 *.xls
 data/
-!projects/project-01-smart-expense-categorizer/sample_transactions.csv
-!projects/project-01-smart-expense-categorizer/test_transactions.csv
+!sample_transactions.csv
+!sample_transactions_us.csv
 
 # IDE
 .vscode/
@@ -55,9 +55,9 @@ desktop.ini
 .railway/
 .heroku/
 
-# Documentation/Guide Files (exclude helper guides)
-GITHUB_PUSH_GUIDE.md
-CREATE_TOKEN_STEPS.md
+# Markdown files (exclude README.md)
+*.md
+!README.md
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -73,3 +73,10 @@ ENV/
 # Streamlit
 .streamlit/secrets.toml
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Other projects (keep only this project)
+projects/

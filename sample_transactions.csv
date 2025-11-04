@@ -1,0 +1,29 @@
+Date,Description,Amount,Transaction_Type
+2024-01-01,Salary Credit,50000,CREDIT
+2024-01-02,Payment to Zomato,450,DEBIT
+2024-01-03,Amazon Purchase,2500,DEBIT
+2024-01-05,Petrol Pump Payment,1500,DEBIT
+2024-01-06,Netflix Subscription,499,DEBIT
+2024-01-08,Grocery Shopping,1200,DEBIT
+2024-01-10,Restaurant Bill,850,DEBIT
+2024-01-12,Electricity Bill,1200,DEBIT
+2024-01-15,Payment to Swiggy,320,DEBIT
+2024-01-18,Flipkart Purchase,1800,DEBIT
+2024-01-20,Hospital Consultation,2000,DEBIT
+2024-01-22,Uber Ride,250,DEBIT
+2024-01-25,Investment Income,3000,CREDIT
+2024-01-28,Online Course Payment,1500,DEBIT
+2024-01-30,Hotel Booking,5000,DEBIT
+2024-02-01,Salary Credit,50000,CREDIT
+2024-02-03,Payment to Zomato,380,DEBIT
+2024-02-05,Amazon Purchase,3200,DEBIT
+2024-02-07,Petrol Pump Payment,1600,DEBIT
+2024-02-09,Spotify Subscription,199,DEBIT
+2024-02-12,Grocery Shopping,1500,DEBIT
+2024-02-15,Restaurant Bill,1200,DEBIT
+2024-02-18,Electricity Bill,1100,DEBIT
+2024-02-20,Payment to Swiggy,450,DEBIT
+2024-02-22,Pharmacy Purchase,350,DEBIT
+2024-02-25,Metro Ticket,150,DEBIT
+2024-02-28,Investment Income,2500,CREDIT
+

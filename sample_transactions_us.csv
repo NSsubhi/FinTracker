@@ -1,0 +1,40 @@
+Date,Description,Amount,Transaction_Type
+2024-01-01,Salary Credit,8000,CREDIT
+2024-01-02,Payment to DoorDash,45,DEBIT
+2024-01-03,Amazon Purchase,125,DEBIT
+2024-01-04,Uber Ride,28,DEBIT
+2024-01-05,Gas Station Payment,65,DEBIT
+2024-01-06,Netflix Subscription,15.99,DEBIT
+2024-01-08,Grocery Shopping - Whole Foods,145,DEBIT
+2024-01-10,Restaurant - Olive Garden,85,DEBIT
+2024-01-12,Electricity Bill - ConEd,180,DEBIT
+2024-01-15,Payment to Grubhub,35,DEBIT
+2024-01-18,Target Purchase,95,DEBIT
+2024-01-20,Medical Consultation,250,DEBIT
+2024-01-22,Subway MetroCard,33,DEBIT
+2024-01-25,Investment Income - Dividends,150,CREDIT
+2024-01-28,Online Course - Coursera,49.99,DEBIT
+2024-01-30,Hotel Booking - Holiday Inn,320,DEBIT
+2024-02-01,Salary Credit,8000,CREDIT
+2024-02-03,Payment to DoorDash,38,DEBIT
+2024-02-05,Amazon Purchase,165,DEBIT
+2024-02-07,Gas Station Payment,72,DEBIT
+2024-02-09,Spotify Premium,10.99,DEBIT
+2024-02-12,Grocery Shopping - Costco,195,DEBIT
+2024-02-15,Restaurant - Chipotle,28,DEBIT
+2024-02-18,Internet Bill - Verizon,89.99,DEBIT
+2024-02-20,Payment to Uber Eats,42,DEBIT
+2024-02-22,CVS Pharmacy,45,DEBIT
+2024-02-25,Book Purchase - Barnes & Noble,28.50,DEBIT
+2024-02-28,Investment Income - Stock Sale,275,CREDIT
+2024-03-01,Salary Credit,8000,CREDIT
+2024-03-03,Payment to DoorDash,52,DEBIT
+2024-03-05,Amazon Purchase,138,DEBIT
+2024-03-07,Gas Station Payment,68,DEBIT
+2024-03-09,Hulu Subscription,14.99,DEBIT
+2024-03-12,Grocery Shopping - Trader Joes,89,DEBIT
+2024-03-15,Restaurant - McDonald's,18,DEBIT
+2024-03-18,Water Bill - City Utilities,65,DEBIT
+2024-03-20,Payment to Postmates,29,DEBIT
+2024-03-22,Walgreen Pharmacy,32,DEBIT
+
