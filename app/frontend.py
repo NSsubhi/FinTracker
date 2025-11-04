@@ -150,8 +150,10 @@ if 'api_available' not in st.session_state:
 with st.sidebar:
     st.markdown("### ⚙️ Configuration")
     
-    # API URL input
-    API_URL = st.text_input("🌐 API Server URL", value="http://localhost:8000", 
+    # API URL input - check environment variable first, then allow user override
+    import os
+    default_api_url = os.getenv("API_URL", "http://localhost:8000")
+    API_URL = st.text_input("🌐 API Server URL", value=default_api_url, 
                             help="Enter your API server URL (leave as default for local)")
     
     # Currency selection
