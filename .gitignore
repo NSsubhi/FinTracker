@@ -60,6 +60,8 @@ desktop.ini
 !README.md
 !DEPLOY.md
 !QUICK_DEPLOY.md
+!DEPLOY_RAILWAY_BOTH.md
+!QUICK_DEPLOY_RAILWAY.md
 
 # Jupyter Notebook
 .ipynb_checkpoints
