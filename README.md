@@ -121,8 +121,6 @@ The application automatically detects and works with various CSV formats:
 - Separate columns: `Date, Description, Withdrawal, Deposit`
 - Currency symbols included: Automatically removed
 
-See [CSV_FORMATS.md](CSV_FORMATS.md) for complete documentation.
-
 ## 🔧 Configuration
 
 - **API URL**: Configure in sidebar (default: http://localhost:8000)
@@ -131,10 +129,7 @@ See [CSV_FORMATS.md](CSV_FORMATS.md) for complete documentation.
 
 ## 📚 Documentation
 
-- [Quick Start Guide](QUICKSTART.md)
-- [Deployment Guide](DEPLOY.md)
-- [CSV Formats Guide](CSV_FORMATS.md)
-- [Testing Guide](TEST.md)
+All documentation is included in this README. For questions or issues, please check the troubleshooting section below.
 
 ## 🐛 Troubleshooting
 
@@ -152,19 +147,14 @@ See [CSV_FORMATS.md](CSV_FORMATS.md) for complete documentation.
 
 ## 🚀 Deployment
 
-### Deploy Backend (Railway)
-1. Push code to GitHub
-2. Connect Railway to your GitHub repo
-3. Deploy automatically
+Deployed on Railway:
+- **Backend**: FastAPI on Railway
+- **Frontend**: Streamlit on Railway
+- **Live Demo**: [https://fintracker-production-7af6.up.railway.app/](https://fintracker-production-7af6.up.railway.app/)
 
-### Deploy Frontend (Streamlit Cloud)
-1. Push code to GitHub
-2. Go to streamlit.io/cloud
-3. Connect repository
-4. Set main file: `app/frontend.py`
-5. Deploy!
-
-See [DEPLOY.md](DEPLOY.md) for detailed instructions.
+For deployment, connect your GitHub repo to Railway and set the start commands manually:
+- Backend: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+- Frontend: `streamlit run app/frontend.py --server.port $PORT --server.address 0.0.0.0`
 
 ## 📝 License
 
