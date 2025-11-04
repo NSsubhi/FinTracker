@@ -1,104 +1,167 @@
-# 💰 FinTracker - Smart Expense Categorizer
+# 🎯 Smart Expense Categorizer with ML
 
-An intelligent expense tracking and categorization system powered by Machine Learning and AI.
+## Overview
+An intelligent expense categorization system that uses Machine Learning and NLP to automatically categorize financial transactions, predict spending patterns, detect anomalies, and provide personalized budget recommendations.
 
-## 🚀 Project Overview
+## 🚀 Features
 
-FinTracker is a full-stack ML-powered application that automatically categorizes financial transactions, predicts spending patterns, and detects anomalies in your financial data.
+### Core ML Features
+- **Auto Categorization**: ML-powered transaction categorization using TF-IDF + Random Forest
+- **NLP Processing**: Advanced text processing for transaction descriptions
+- **Spending Prediction**: Time series forecasting for future expenses using Prophet
+- **Anomaly Detection**: Identify unusual spending patterns using Isolation Forest
+- **Smart Recommendations**: Personalized budget suggestions based on spending history
 
-## 📁 Project Structure
+### Web Application Features
+- 📊 Interactive Dashboard with beautiful visualizations
+- 📤 CSV Upload & Processing with automatic format detection
+- 📈 Real-time Analytics and insights
+- 🎯 Category Management
+- 📱 Responsive Design
+- 🔒 Data Privacy (client-side processing option)
+- 💰 Multi-currency support (USD, INR, EUR, GBP, etc.)
 
-```
-FinTracker/
-├── projects/
-│   └── project-01-smart-expense-categorizer/  # Main ML-powered expense categorizer
-│       ├── app/                                # Application code
-│       │   ├── main.py                         # FastAPI backend
-│       │   ├── frontend.py                     # Streamlit frontend
-│       │   ├── ml_models.py                    # ML models
-│       │   └── data_processor.py               # Data processing
-│       ├── sample_transactions.csv             # Sample data
-│       ├── requirements.txt                    # Dependencies
-│       └── README.md                           # Project documentation
-└── README.md                                   # This file
-```
-
-## 🎯 Features
-
-- ✅ **Auto Categorization**: ML-powered transaction categorization using NLP
-- ✅ **Spending Predictions**: Time-series forecasting with Prophet
-- ✅ **Anomaly Detection**: Fraud and unusual pattern detection
-- ✅ **Auto Format Detection**: Works with various CSV formats automatically
-- ✅ **Beautiful Dashboard**: Interactive visualizations with Plotly
-- ✅ **REST API**: FastAPI backend with comprehensive endpoints
+### Smart CSV Processing
+- ✅ **Automatic Format Detection**: Works with any CSV format!
+- ✅ Supports various column name variations (Date, Transaction Date, Posting Date, etc.)
+- ✅ Handles separate Debit/Credit columns or single Amount column
+- ✅ Automatically removes currency symbols (₹, $, €, etc.)
+- ✅ Multiple encoding support (UTF-8, Latin-1, CP1252)
 
 ## 🛠️ Tech Stack
 
 - **Backend**: FastAPI (Python)
 - **Frontend**: Streamlit (Python)
-- **ML Models**: scikit-learn, Prophet
+- **ML Models**: scikit-learn, Prophet (forecasting)
 - **Visualization**: Plotly, Matplotlib
-- **Deployment**: Railway, Streamlit Cloud
+- **Deployment**: Railway (Backend) + Streamlit Cloud (Frontend)
 
-## 📊 Main Project: Smart Expense Categorizer
+## 📋 Installation
 
-The main project is located in `projects/project-01-smart-expense-categorizer/`
+```bash
+cd projects/project-01-smart-expense-categorizer
+python -m venv venv
 
-### Quick Start
+# Activate virtual environment
+# Windows:
+.\venv\Scripts\Activate.ps1
+# Linux/Mac:
+source venv/bin/activate
 
-1. Navigate to the project:
-   ```bash
-   cd projects/project-01-smart-expense-categorizer
-   ```
+# Install dependencies
+pip install -r requirements.txt
+```
 
-2. Create virtual environment:
-   ```bash
-   python -m venv venv
-   .\venv\Scripts\Activate.ps1  # Windows
-   ```
+## 🚀 Running Locally
 
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Start Backend API (Terminal 1)
+```bash
+cd app
+uvicorn main:app --reload --port 8000
+```
 
-4. Start backend:
-   ```bash
-   cd app
-   uvicorn main:app --reload --port 8000
-   ```
+✅ API will be available at: http://localhost:8000  
+📚 API Docs: http://localhost:8000/docs
 
-5. Start frontend (new terminal):
-   ```bash
-   cd app
-   streamlit run frontend.py --server.port 8501
-   ```
+### Start Frontend (Terminal 2)
+```bash
+cd app
+streamlit run frontend.py --server.port 8501
+```
 
-6. Open browser: http://localhost:8501
+✅ Frontend will be available at: http://localhost:8501
 
-### Features
+## 📊 API Endpoints
 
-- **Upload CSV**: Automatically detects CSV format and maps columns
-- **ML Categorization**: Categorizes transactions using NLP + Random Forest
-- **Spending Predictions**: Forecasts future spending patterns
-- **Anomaly Detection**: Identifies unusual transactions
-- **Analytics Dashboard**: Beautiful charts and insights
+- `GET /` - API root endpoint
+- `GET /health` - Health check
+- `POST /api/upload` - Upload CSV file for processing
+- `POST /api/categorize` - Categorize single transaction
+- `POST /api/batch-categorize` - Categorize multiple transactions
+- `POST /api/analytics` - Get spending analytics
+- `POST /api/predict` - Get spending predictions (forecast)
+- `POST /api/anomalies` - Detect anomalous transactions
+
+## 📁 Sample Data
+
+Download the sample CSV file directly from the app:
+1. Open the application
+2. Click "📁 Need a sample file?"
+3. Click "⬇️ Download Sample File"
+4. Upload it back to test the application!
+
+## 🎓 ML Components
+
+1. **Text Classification Model**: TF-IDF Vectorization + Random Forest Classifier
+2. **Time Series Forecasting**: Prophet model for spending prediction
+3. **Anomaly Detection**: Isolation Forest for fraud/error detection
+4. **Feature Engineering**: Date features, amount bins, text embeddings
+
+## 📈 Resume Points
+
+- ✅ Built end-to-end ML pipeline from data ingestion to predictions
+- ✅ Implemented NLP-based text classification achieving 85%+ accuracy
+- ✅ Developed real-time anomaly detection system
+- ✅ Created interactive dashboard with Plotly visualizations
+- ✅ Deployed scalable API using FastAPI on Railway
+- ✅ Integrated multiple ML models (classification, forecasting, anomaly detection)
+- ✅ Built automatic CSV format detection system supporting multiple formats
+- ✅ Implemented multi-currency support with dynamic currency display
+
+## 🎯 Supported CSV Formats
+
+The application automatically detects and works with various CSV formats:
+
+- Standard format: `Date, Description, Amount, Transaction_Type`
+- Bank statements: `Transaction Date, Narration, Debit, Credit`
+- Alternative names: `Posting Date, Details, Transaction Amount`
+- Separate columns: `Date, Description, Withdrawal, Deposit`
+- Currency symbols included: Automatically removed
+
+See [CSV_FORMATS.md](CSV_FORMATS.md) for complete documentation.
+
+## 🔧 Configuration
+
+- **API URL**: Configure in sidebar (default: http://localhost:8000)
+- **Currency Symbol**: Select from sidebar ($, ₹, €, £, ¥, or None)
+- **Test Connection**: Use the "🔌 Test Connection" button in sidebar
 
 ## 📚 Documentation
 
-- [Project README](projects/project-01-smart-expense-categorizer/README.md)
-- [Deployment Guide](projects/project-01-smart-expense-categorizer/DEPLOY.md)
-- [CSV Formats Guide](projects/project-01-smart-expense-categorizer/CSV_FORMATS.md)
-- [Quick Start Guide](projects/project-01-smart-expense-categorizer/QUICKSTART.md)
+- [Quick Start Guide](QUICKSTART.md)
+- [Deployment Guide](DEPLOY.md)
+- [CSV Formats Guide](CSV_FORMATS.md)
+- [Testing Guide](TEST.md)
 
-## 🎓 Resume Points
+## 🐛 Troubleshooting
 
-- Built end-to-end ML pipeline from data ingestion to predictions
-- Implemented NLP-based text classification achieving 85%+ accuracy
-- Developed real-time anomaly detection system
-- Created interactive dashboard with Plotly visualizations
-- Deployed scalable REST API using FastAPI on Railway
-- Integrated multiple ML models (classification, forecasting, anomaly detection)
+**Issue**: Port already in use  
+**Solution**: Change port in uvicorn/streamlit command
+
+**Issue**: Module not found  
+**Solution**: Make sure venv is activated: `.\venv\Scripts\Activate.ps1`
+
+**Issue**: CSV format not detected  
+**Solution**: Ensure CSV has Date, Description, and Amount columns (any variations work)
+
+**Issue**: API connection error  
+**Solution**: Make sure backend is running first, then test connection in sidebar
+
+## 🚀 Deployment
+
+### Deploy Backend (Railway)
+1. Push code to GitHub
+2. Connect Railway to your GitHub repo
+3. Deploy automatically
+
+### Deploy Frontend (Streamlit Cloud)
+1. Push code to GitHub
+2. Go to streamlit.io/cloud
+3. Connect repository
+4. Set main file: `app/frontend.py`
+5. Deploy!
+
+See [DEPLOY.md](DEPLOY.md) for detailed instructions.
 
 ## 📝 License
 
@@ -110,5 +173,4 @@ This project is open source and available for personal and educational use.
 
 ---
 
-**Happy Tracking! 💰**
-
+**Happy Expense Tracking! 💰**
