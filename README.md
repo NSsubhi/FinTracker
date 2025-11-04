@@ -1,5 +1,8 @@
 # 🎯 Smart Expense Categorizer with ML
 
+## 🌐 Live Demo
+**👉 [Try it now!](https://fintracker-production-7af6.up.railway.app/)**
+
 ## Overview
 An intelligent expense categorization system that uses Machine Learning and NLP to automatically categorize financial transactions, predict spending patterns, detect anomalies, and provide personalized budget recommendations.
 
