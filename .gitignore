@@ -55,9 +55,11 @@ desktop.ini
 .railway/
 .heroku/
 
-# Markdown files (exclude README.md)
+# Markdown files (exclude README.md and deployment docs)
 *.md
 !README.md
+!DEPLOY.md
+!QUICK_DEPLOY.md
 
 # Jupyter Notebook
 .ipynb_checkpoints
